@@ -5,7 +5,17 @@ function App() {
   async function getPokemon() {
     const res = await fetch("/pokemon.json");
     const data = await res.json();
-    setPokemon(data);
+    const populatedData = data.map((el) => {
+      const power =
+        el.hp +
+        el.attack +
+        el.defense +
+        el.special_attack +
+        el.special_defense +
+        el.speed;
+      return { ...el, power };
+    });
+    setPokemon(populatedData);
   }
   useEffect(() => {
     getPokemon()
