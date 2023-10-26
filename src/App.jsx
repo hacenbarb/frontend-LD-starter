@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Table } from "./components";
 function App() {
-  const [pokemon, setPokemon] = useState([])
+  const [pokemon, setPokemon] = useState([]);
   async function getPokemon() {
     const res = await fetch("/pokemon.json");
     const data = await res.json();
@@ -18,12 +18,16 @@ function App() {
     setPokemon(populatedData);
   }
   useEffect(() => {
-    getPokemon()
-  }, [])
+    getPokemon();
+  }, []);
   return (
     <div className="container my-12">
       <div className="w-full h-12"> </div>
-      <Table data={pokemon}/>
+      <Table
+        data={pokemon}
+        pagination={true}
+        paginationOptions={{ rowsPerPage: [5, 10, 20] }}
+      />
     </div>
   );
 }
