@@ -34,7 +34,8 @@ function TablePagination({ data, paginationOptions, handlePageData }) {
   }
   useEffect(() => {
     paginate(currentPage, rowsPerPage);
-  }, []);
+    setCurrentPage(1);
+  }, [data]);
 
   return (
     <div className="flex items-center justify-end gap-4 mt-4 ">
