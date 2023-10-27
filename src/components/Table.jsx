@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TablePagination } from "./";
 
 function table({ data, pagination, paginationOptions }) {
@@ -7,7 +7,11 @@ function table({ data, pagination, paginationOptions }) {
   }
   const tableHeaders = Object.keys(data[0]);
   const [pageData, setPageData] = useState(data);
-  
+  useEffect(() => {
+    if (!pagination) {
+      setPageData(data);
+    }
+  }, [data]);
   return (
     <>
       <table className="w-full text-center text-gray-700 shadow-lg rounded-2xl overflow-hidden">
@@ -29,7 +33,7 @@ function table({ data, pagination, paginationOptions }) {
               {tableHeaders.map((header) => (
                 <td
                   key={header}
-                  className="py-3 border-b max-w-[5rem] truncate"
+                  className="px-1 py-3 border-b max-w-[5rem] truncate"
                 >
                   {Array.isArray(el[header])
                     ? el[header].join(", ")
@@ -44,7 +48,7 @@ function table({ data, pagination, paginationOptions }) {
         <TablePagination
           data={data}
           paginationOptions={paginationOptions}
-          handlePageData={(pageData) => setPageData(pageData)}
+          handlePageData={(res) => setPageData(res)}
         />
       )}
     </>
