@@ -20,6 +20,13 @@ function table({
       setPageData(data);
     }
   }, [data]);
+  useEffect(() => {
+    if (pagination) {
+      handlePageData(pageData);
+    } else {
+      handlePageData(data);
+    }
+  }, [pageData]);
   return (
     <>
       <table className="w-full text-center text-gray-700 shadow-lg rounded-2xl overflow-hidden">
