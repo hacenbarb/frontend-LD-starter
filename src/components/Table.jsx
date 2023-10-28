@@ -1,11 +1,19 @@
 import { useEffect, useState } from "react";
 import { TablePagination } from "./";
 
-function table({ data, pagination, paginationOptions }) {
+function table({
+  data,
+  hidedProperty,
+  pagination,
+  paginationOptions,
+  handlePageData,
+}) {
   if (data.length === 0) {
     return <div className="text-center">No data available.</div>;
   }
-  const tableHeaders = Object.keys(data[0]);
+  const tableHeaders = Object.keys(data[0]).filter(
+    (el) => !hidedProperty.includes(el)
+  );
   const [pageData, setPageData] = useState(data);
   useEffect(() => {
     if (!pagination) {
