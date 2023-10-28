@@ -53,12 +53,13 @@ function TablePagination({ data, paginationOptions, handlePageData }) {
           <div className="absolute top-6 right-0 w-fit h-fit flex flex-col rounded-lg shadow-md overflow-hidden">
             {paginationOptions.rowsPerPage
               .filter((el) => el !== rowsPerPage)
-              .map((el) => (
+              .map((el, index) => (
                 <button
                   className="w-full text-center text-black hover:bg-gray-300 transition-colors px-6 py-2"
                   onClick={() => {
                     handleRowsPerPage(el);
                   }}
+                  key={index}
                 >
                   {el}
                 </button>
