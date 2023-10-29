@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Table, SearchInput } from "./components";
+import { BsSearch, BsHeart } from "react-icons/bs";
 
 function App() {
   const [pokemon, setPokemon] = useState([]);
@@ -39,17 +40,26 @@ function App() {
   }, [pageData]);
   return (
     <div className="container my-12">
-      <div className="w-full h-12"> </div>
-      <div className="shadow-lg rounded-2xl overflow-hidden p-6 mb-20">
+      <div className="shadow-lg rounded-2xl overflow-hidden p-6 mb-12">
         <div className="flex items-center justify-between gap-8 mb-6">
           <SearchInput
+            type="text"
             data={pokemon}
             field="name"
+            searchAlgo="isStringFound"
             handleSearchData={(res) => setSearchResult(res)}
+            placeholder="Search"
+            icon={<BsSearch className="w-full h-full"/>}
           />
-          <div className="flex-1 flex items-center gap-4 border rounded-md px-4 py-2">
-            test
-          </div>
+          <SearchInput
+            type="number"
+            data={pokemon}
+            field="power"
+            searchAlgo="isNumberGTE"
+            handleSearchData={(res) => setSearchResult(res)}
+            placeholder="Power threshold"
+            icon={<BsHeart className="w-full h-full"/>}
+          />
         </div>
         <p className="mb-2">Min power: {minPower}</p>
         <p>Max power: {maxPower}</p>
